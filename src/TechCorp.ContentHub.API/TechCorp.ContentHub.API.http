@@ -1,0 +1,6 @@
+@TechCorp.ContentHub.API_HostAddress = http://localhost:5121
+
+GET {{TechCorp.ContentHub.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
