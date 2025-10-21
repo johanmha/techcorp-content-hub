@@ -1,4 +1,5 @@
 using Serilog;
+using TechCorp.ContentHub.Core.Configuration;
 using TechCorp.ContentHub.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,8 +18,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Register our services - using Mock for now
-builder.Services.AddSingleton<IContentService, MockContentService>();
+// Add HttpClient support
+builder.Services.AddHttpClient();
+
+// Configure Contentful with our renamed settings class
+builder.Services.Configure<ContentfulSettings>(
+    builder.Configuration.GetSection("Contentful"));
+
+// Register Contentful service (not mock anymore!)
+builder.Services.AddSingleton<IContentService, ContentfulService>();
 
 // Add CORS for React app
 builder.Services.AddCors(options =>
@@ -31,6 +39,7 @@ builder.Services.AddCors(options =>
 
 // Add response caching
 builder.Services.AddResponseCaching();
+builder.Services.AddMemoryCache(); // For future caching
 
 var app = builder.Build();
 
@@ -46,5 +55,8 @@ app.UseCors("ReactApp");
 app.UseResponseCaching();
 app.UseAuthorization();
 app.MapControllers();
+
+// Add a welcome endpoint
+app.MapGet("/", () => "TechCorp Content Hub API - Visit /swagger for API documentation");
 
 app.Run();
