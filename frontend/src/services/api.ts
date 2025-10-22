@@ -1,12 +1,14 @@
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import { BlogPost, Author, Category } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api'; // Adjust as per your backend API URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5121/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
 });
 
+// API functions
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
   const response = await api.get<BlogPost[]>('/content/blogposts');
   return response.data;
@@ -35,4 +37,50 @@ export const getCategories = async (): Promise<Category[]> => {
 export const getCategoryBySlug = async (slug: string): Promise<Category> => {
   const response = await api.get<Category>(`/content/categories/${slug}`);
   return response.data;
+};
+
+// React Query hooks
+export const useBlogPosts = () => {
+  return useQuery({
+    queryKey: ['blogPosts'],
+    queryFn: getBlogPosts,
+  });
+};
+
+export const useBlogPost = (slug: string) => {
+  return useQuery({
+    queryKey: ['blogPost', slug],
+    queryFn: () => getBlogPostBySlug(slug),
+    enabled: !!slug,
+  });
+};
+
+export const useAuthors = () => {
+  return useQuery({
+    queryKey: ['authors'],
+    queryFn: getAuthors,
+  });
+};
+
+export const useAuthor = (id: string) => {
+  return useQuery({
+    queryKey: ['author', id],
+    queryFn: () => getAuthorById(id),
+    enabled: !!id,
+  });
+};
+
+export const useCategories = () => {
+  return useQuery({
+    queryKey: ['categories'],
+    queryFn: getCategories,
+  });
+};
+
+export const useCategory = (slug: string) => {
+  return useQuery({
+    queryKey: ['category', slug],
+    queryFn: () => getCategoryBySlug(slug),
+    enabled: !!slug,
+  });
 };
