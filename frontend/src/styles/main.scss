@@ -14,11 +14,71 @@
   padding: 20px;
 }
 
-header {
+/* Header Navigation */
+.site-header {
   background-color: variables.$primary-color;
   color: white;
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-logo {
+  text-decoration: none;
+  color: white;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+
+  a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
 }
 
 footer {
@@ -114,4 +174,143 @@ footer {
   color: red;
   text-align: center;
   padding: 20px;
+}
+
+/* Author Links */
+.author-link {
+  color: variables.$primary-color;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.post-author,
+.card-author {
+  color: variables.$text-secondary;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* Authors Listing Page */
+.authors-listing-page {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-description {
+    color: variables.$text-secondary;
+    margin-bottom: 2rem;
+  }
+}
+
+.authors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.author-card {
+  display: block;
+  border: 1px solid variables.$light-gray;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .author-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  .author-info {
+    h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      color: variables.$text-primary;
+    }
+
+    .author-title {
+      color: variables.$primary-color;
+      font-size: 0.9rem;
+      margin: 0 0 0.75rem 0;
+    }
+
+    .author-bio-excerpt {
+      color: variables.$text-secondary;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin: 0;
+    }
+  }
+}
+
+/* Categories Listing Page */
+.categories-listing-page {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  .page-description {
+    color: variables.$text-secondary;
+    margin-bottom: 2rem;
+  }
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.category-card {
+  display: block;
+  border: 1px solid variables.$light-gray;
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    color: variables.$text-primary;
+  }
+
+  .category-description {
+    color: variables.$text-secondary;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0 0 1rem 0;
+  }
+
+  .view-posts {
+    color: variables.$primary-color;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
 }

@@ -14,7 +14,15 @@ const BlogCard: React.FC<BlogCardProps> = ({ post }) => {
         <h2>{post.title}</h2>
       </Link>
       <p>{post.summary}</p>
-      {/* Add author, categories, date, etc. */}
+      {post.author && (
+        <p className="card-author">
+          By{' '}
+          <Link to={`/author/${post.author.id}`} className="author-link">
+            {post.author.name}
+          </Link>
+        </p>
+      )}
+      {/* Add categories, date, etc. */}
     </div>
   );
 };

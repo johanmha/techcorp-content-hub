@@ -6,7 +6,9 @@ import HomePage from './pages/HomePage';
 import BlogListingPage from './pages/BlogListingPage';
 import BlogDetailPage from './pages/BlogDetailPage';
 import AuthorPage from './pages/AuthorPage';
+import AuthorsListingPage from './pages/AuthorsListingPage';
 import CategoryPage from './pages/CategoryPage';
+import CategoriesListingPage from './pages/CategoriesListingPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 // Create a client
@@ -29,7 +31,9 @@ const App: React.FC = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/blog" element={<BlogListingPage />} />
             <Route path="/blog/:slug" element={<BlogDetailPage />} />
+            <Route path="/authors" element={<AuthorsListingPage />} />
             <Route path="/author/:id" element={<AuthorPage />} />
+            <Route path="/categories" element={<CategoriesListingPage />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
             <Route path="*" element={<NotFoundPage />} /> {/* Catch-all for 404 */}
           </Routes>

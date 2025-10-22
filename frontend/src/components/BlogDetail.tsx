@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { BlogPost } from '../types';
 
 interface BlogDetailProps {
@@ -10,7 +11,14 @@ const BlogDetail: React.FC<BlogDetailProps> = ({ post }) => {
     <article className="blog-detail">
       {post.featuredImage && <img src={post.featuredImage} alt={post.title} />}
       <h1>{post.title}</h1>
-      {post.author && <p>By {post.author.name}</p>}
+      {post.author && (
+        <p className="post-author">
+          By{' '}
+          <Link to={`/author/${post.author.id}`} className="author-link">
+            {post.author.name}
+          </Link>
+        </p>
+      )}
       <div dangerouslySetInnerHTML={{ __html: post.content }} />
       {/* Add categories, tags, published date, etc. */}
     </article>
