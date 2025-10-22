@@ -10,12 +10,12 @@ const api = axios.create({
 
 // API functions
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
-  const response = await api.get<BlogPost[]>('/content/blogposts');
+  const response = await api.get<BlogPost[]>('/content/posts');
   return response.data;
 };
 
 export const getBlogPostBySlug = async (slug: string): Promise<BlogPost> => {
-  const response = await api.get<BlogPost>(`/content/blogposts/${slug}`);
+  const response = await api.get<BlogPost>(`/content/posts/${slug}`);
   return response.data;
 };
 
