@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "webpack serve --mode development",
     "start": "webpack serve --open",
     "build": "webpack --mode production",
     "typecheck": "tsc --noEmit",

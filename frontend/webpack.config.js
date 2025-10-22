@@ -52,5 +52,13 @@ module.exports = {
     compress: true,
     port: 3001,
     historyApiFallback: true, // For React Router
+    proxy: [
+      {
+        context: ['/api'],
+        target: 'http://localhost:5121',
+        changeOrigin: true,
+        secure: false,
+      },
+    ],
   },
 };
