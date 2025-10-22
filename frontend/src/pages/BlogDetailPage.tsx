@@ -1,45 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { BlogPost } from '../types';
-import { getBlogPostBySlug } from '../services/api';
+import { useBlogPost } from '../services/api';
 import BlogDetail from '../components/BlogDetail';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SEO from '../components/SEO';
 
 const BlogDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: post, isLoading, error } = useBlogPost(slug || '');
 
-  useEffect(() => {
-    if (!slug) {
-      setError('Blog post slug is missing.');
-      setLoading(false);
-      return;
-    }
+  if (!slug) {
+    return <p className="error-message">Blog post slug is missing.</p>;
+  }
 
-    const fetchPost = async () => {
-      try {
-        const data = await getBlogPostBySlug(slug);
-        setPost(data);
-      } catch (err) {
-        setError('Failed to fetch blog post.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPost();
-  }, [slug]);
-
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <p className="error-message">{error}</p>;
+    return <p className="error-message">Failed to fetch blog post.</p>;
   }
 
   if (!post) {

@@ -1,45 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Author } from '../types';
-import { getAuthorById } from '../services/api';
+import { useAuthor } from '../services/api';
 import AuthorBio from '../components/AuthorBio';
 import LoadingSpinner from '../components/LoadingSpinner';
 import SEO from '../components/SEO';
 
 const AuthorPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [author, setAuthor] = useState<Author | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data: author, isLoading, error } = useAuthor(id || '');
 
-  useEffect(() => {
-    if (!id) {
-      setError('Author ID is missing.');
-      setLoading(false);
-      return;
-    }
+  if (!id) {
+    return <p className="error-message">Author ID is missing.</p>;
+  }
 
-    const fetchAuthor = async () => {
-      try {
-        const data = await getAuthorById(id);
-        setAuthor(data);
-      } catch (err) {
-        setError('Failed to fetch author details.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchAuthor();
-  }, [id]);
-
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <p className="error-message">{error}</p>;
+    return <p className="error-message">Failed to fetch author details.</p>;
   }
 
   if (!author) {
