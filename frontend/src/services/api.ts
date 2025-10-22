@@ -2,7 +2,9 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { BlogPost, Author, Category } from '../types';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5121/api';
+// Use proxy in development (/api -> http://localhost:5121/api)
+// In production, set REACT_APP_API_BASE_URL to your actual API URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

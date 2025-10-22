@@ -32,7 +32,7 @@ builder.Services.AddSingleton<IContentService, ContentfulService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactApp",
-        policy => policy.WithOrigins("http://localhost:3000")
+        policy => policy.WithOrigins("http://localhost:3001")
                        .AllowAnyMethod()
                        .AllowAnyHeader());
 });
