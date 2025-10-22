@@ -40,16 +40,44 @@ public class ContentController : ControllerBase
     }
     
     [HttpGet("authors")]
-    public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()  
+    public async Task<ActionResult<IEnumerable<Author>>> GetAuthors()
     {
         var authors = await _contentService.GetAuthorsAsync();
         return Ok(authors);
     }
-    
+
+    [HttpGet("authors/{id}")]
+    public async Task<ActionResult<Author>> GetAuthorById(string id)
+    {
+        _logger.LogInformation("Fetching author with ID: {Id}", id);
+        var author = await _contentService.GetAuthorByIdAsync(id);
+
+        if (author == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(author);
+    }
+
     [HttpGet("categories")]
     public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
     {
         var categories = await _contentService.GetCategoriesAsync();
         return Ok(categories);
+    }
+
+    [HttpGet("categories/{slug}")]
+    public async Task<ActionResult<Category>> GetCategoryBySlug(string slug)
+    {
+        _logger.LogInformation("Fetching category with slug: {Slug}", slug);
+        var category = await _contentService.GetCategoryBySlugAsync(slug);
+
+        if (category == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(category);
     }
 }

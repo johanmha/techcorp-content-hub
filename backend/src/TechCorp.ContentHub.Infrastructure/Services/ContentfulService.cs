@@ -120,25 +120,76 @@ public class ContentfulService : IContentService
         }
     }
 
+    public async Task<Author?> GetAuthorByIdAsync(string id)
+    {
+        try
+        {
+            _logger.LogInformation("Fetching author with ID: {Id}", id);
+
+            var entry = await _client.GetEntry<dynamic>(id);
+
+            if (entry == null)
+            {
+                _logger.LogWarning("Author with ID {Id} not found", id);
+                return null;
+            }
+
+            return MapToAuthor(entry);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching author with ID: {Id}", id);
+            throw;
+        }
+    }
+
     public async Task<IEnumerable<Category>> GetCategoriesAsync()
     {
         try
         {
             _logger.LogInformation("Fetching categories from Contentful");
-            
+
             var queryBuilder = QueryBuilder<dynamic>.New
                 .ContentTypeIs("category");
-                
+
             var entries = await _client.GetEntries(queryBuilder);
-            
+
             var categories = entries.Select(MapToCategory).ToList();
-            
+
             _logger.LogInformation("Successfully fetched {Count} categories", categories.Count);
             return categories;
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error fetching categories from Contentful");
+            throw;
+        }
+    }
+
+    public async Task<Category?> GetCategoryBySlugAsync(string slug)
+    {
+        try
+        {
+            _logger.LogInformation("Fetching category with slug: {Slug}", slug);
+
+            var queryBuilder = QueryBuilder<dynamic>.New
+                .ContentTypeIs("category")
+                .FieldEquals("fields.slug", slug);
+
+            var entries = await _client.GetEntries(queryBuilder);
+            var entry = entries.FirstOrDefault();
+
+            if (entry == null)
+            {
+                _logger.LogWarning("Category with slug {Slug} not found", slug);
+                return null;
+            }
+
+            return MapToCategory(entry);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error fetching category with slug: {Slug}", slug);
             throw;
         }
     }
