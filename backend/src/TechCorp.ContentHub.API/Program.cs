@@ -14,7 +14,7 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services
-builder.Services.AddControllers();
+builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -27,15 +27,6 @@ builder.Services.Configure<ContentfulSettings>(
 
 // Register Contentful service (not mock anymore!)
 builder.Services.AddSingleton<IContentService, ContentfulService>();
-
-// Add CORS for React app
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("ReactApp",
-        policy => policy.WithOrigins("http://localhost:3001")
-                       .AllowAnyMethod()
-                       .AllowAnyHeader());
-});
 
 // Add response caching
 builder.Services.AddResponseCaching();
@@ -51,12 +42,30 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("ReactApp");
+app.UseStaticFiles(); // Enable serving static files from wwwroot
+app.UseRouting();
 app.UseResponseCaching();
 app.UseAuthorization();
-app.MapControllers();
 
-// Add a welcome endpoint
-app.MapGet("/", () => "TechCorp Content Hub API - Visit /swagger for API documentation");
+// Map MVC routes
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Custom routes for better URLs
+app.MapControllerRoute(
+    name: "blogDetail",
+    pattern: "blog/{slug}",
+    defaults: new { controller = "Blog", action = "Detail" });
+
+app.MapControllerRoute(
+    name: "authorProfile",
+    pattern: "authors/{slug}",
+    defaults: new { controller = "Authors", action = "Profile" });
+
+app.MapControllerRoute(
+    name: "categoryDetail",
+    pattern: "categories/{slug}",
+    defaults: new { controller = "Categories", action = "Category" });
 
 app.Run();
