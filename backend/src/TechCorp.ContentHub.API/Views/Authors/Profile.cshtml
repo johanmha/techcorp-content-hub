@@ -1,0 +1,31 @@
+@model TechCorp.ContentHub.API.ViewModels.AuthorViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="author-profile">
+    <header class="profile-header">
+        @if (!string.IsNullOrEmpty(Model.ProfileImage))
+        {
+            <img src="@Model.ProfileImage" alt="@Model.Name" class="profile-image" />
+        }
+        <div class="profile-info">
+            <h1>@Model.Name</h1>
+            @if (!string.IsNullOrEmpty(Model.Title))
+            {
+                <p class="profile-title">@Model.Title</p>
+            }
+            <p class="profile-bio">@Model.Bio</p>
+
+            @if (Model.SocialLinks.Any())
+            {
+                <div class="social-links">
+                    @foreach (var link in Model.SocialLinks)
+                    {
+                        <a href="@link" target="_blank" rel="noopener noreferrer">@link</a>
+                    }
+                </div>
+            }
+        </div>
+    </header>
+</div>

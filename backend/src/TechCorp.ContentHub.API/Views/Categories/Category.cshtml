@@ -1,0 +1,19 @@
+@model TechCorp.ContentHub.API.ViewModels.CategoryDetailViewModel
+@{
+    ViewData["Title"] = Model.Category.Name;
+}
+
+<div class="category-detail">
+    <header class="page-header" style="border-color: @Model.Category.Color">
+        <h1>@Model.Category.Name</h1>
+        <p>@Model.Category.Description</p>
+        <p class="post-count">@Model.Posts.Count articles</p>
+    </header>
+
+    <div class="blog-grid">
+        @foreach (var post in Model.Posts)
+        {
+            <partial name="_BlogCard" model="post" />
+        }
+    </div>
+</div>

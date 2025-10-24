@@ -1,0 +1,71 @@
+@model TechCorp.ContentHub.API.ViewModels.BlogPostViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<article class="blog-detail">
+    <header class="article-header">
+        @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+        {
+            <img src="@Model.FeaturedImage" alt="@Model.Title" class="featured-image" />
+        }
+        <h1>@Model.Title</h1>
+
+        <div class="article-meta">
+            @if (Model.Author != null)
+            {
+                <div class="author-info">
+                    @if (!string.IsNullOrEmpty(Model.Author.ProfileImage))
+                    {
+                        <img src="@Model.Author.ProfileImage" alt="@Model.Author.Name" class="author-avatar" />
+                    }
+                    <div>
+                        <a asp-controller="Authors" asp-action="Profile" asp-route-slug="@Model.Author.Id">
+                            @Model.Author.Name
+                        </a>
+                        @if (!string.IsNullOrEmpty(Model.Author.Title))
+                        {
+                            <span class="author-title">@Model.Author.Title</span>
+                        }
+                    </div>
+                </div>
+            }
+            <div class="post-meta">
+                <time datetime="@Model.PublishedDate.ToString("yyyy-MM-dd")">
+                    @Model.PublishedDate.ToString("MMMM dd, yyyy")
+                </time>
+                <span>@Model.ReadingTime min read</span>
+            </div>
+        </div>
+
+        @if (Model.Categories.Any())
+        {
+            <div class="article-categories">
+                @foreach (var category in Model.Categories)
+                {
+                    <a asp-controller="Categories" asp-action="Category" asp-route-slug="@category.Slug"
+                       class="category-tag" style="background-color: @category.Color">
+                        @category.Name
+                    </a>
+                }
+            </div>
+        }
+    </header>
+
+    <div class="article-content">
+        @Html.Raw(Model.Content)
+    </div>
+
+    @if (Model.Tags.Any())
+    {
+        <footer class="article-footer">
+            <div class="tags">
+                <strong>Tags:</strong>
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="tag">@tag</span>
+                }
+            </div>
+        </footer>
+    }
+</article>

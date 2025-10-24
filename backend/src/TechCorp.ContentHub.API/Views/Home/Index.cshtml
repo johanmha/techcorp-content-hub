@@ -1,0 +1,35 @@
+@model TechCorp.ContentHub.API.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="home-page">
+    <section class="hero">
+        <h1>Welcome to TechCorp Content Hub</h1>
+        <p>Explore our latest articles, insights, and technology news</p>
+    </section>
+
+    <section class="featured-posts">
+        <h2>Featured Articles</h2>
+        <div class="blog-grid">
+            @foreach (var post in Model.FeaturedPosts)
+            {
+                <partial name="_BlogCard" model="post" />
+            }
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>Browse by Category</h2>
+        <div class="category-list">
+            @foreach (var category in Model.Categories)
+            {
+                <a asp-controller="Categories" asp-action="Category" asp-route-slug="@category.Slug"
+                   class="category-card" style="border-color: @category.Color">
+                    <h3>@category.Name</h3>
+                    <p>@category.Description</p>
+                </a>
+            }
+        </div>
+    </section>
+</div>

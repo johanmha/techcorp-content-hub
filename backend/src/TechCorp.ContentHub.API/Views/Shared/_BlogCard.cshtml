@@ -1,0 +1,37 @@
+@model TechCorp.ContentHub.API.ViewModels.BlogPostViewModel
+
+<div class="blog-card">
+    <a asp-controller="Blog" asp-action="Detail" asp-route-slug="@Model.Slug">
+        @if (!string.IsNullOrEmpty(Model.FeaturedImage))
+        {
+            <img src="@Model.FeaturedImage" alt="@Model.Title" />
+        }
+        <h2>@Model.Title</h2>
+    </a>
+    <p>@Model.Summary</p>
+    @if (Model.Author != null)
+    {
+        <p class="card-author">
+            By
+            <a asp-controller="Authors" asp-action="Profile" asp-route-slug="@Model.Author.Id" class="author-link">
+                @Model.Author.Name
+            </a>
+        </p>
+    }
+    @if (Model.Categories.Any())
+    {
+        <div class="card-categories">
+            @foreach (var category in Model.Categories)
+            {
+                <a asp-controller="Categories" asp-action="Category" asp-route-slug="@category.Slug"
+                   class="category-tag" style="background-color: @category.Color">
+                    @category.Name
+                </a>
+            }
+        </div>
+    }
+    <p class="card-meta">
+        <span>@Model.PublishedDate.ToString("MMM dd, yyyy")</span>
+        <span>@Model.ReadingTime min read</span>
+    </p>
+</div>

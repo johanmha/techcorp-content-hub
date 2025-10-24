@@ -1,0 +1,22 @@
+@model TechCorp.ContentHub.API.ViewModels.CategoryListingViewModel
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="categories-listing">
+    <header class="page-header">
+        <h1>Browse Categories</h1>
+        <p>@Model.TotalCategories categories available</p>
+    </header>
+
+    <div class="categories-grid">
+        @foreach (var category in Model.Categories)
+        {
+            <a asp-controller="Categories" asp-action="Category" asp-route-slug="@category.Slug"
+               class="category-card" style="border-color: @category.Color">
+                <h2>@category.Name</h2>
+                <p>@category.Description</p>
+            </a>
+        }
+    </div>
+</div>

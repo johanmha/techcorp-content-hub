@@ -1,0 +1,18 @@
+@model TechCorp.ContentHub.API.ViewModels.BlogListingViewModel
+@{
+    ViewData["Title"] = "Blog";
+}
+
+<div class="blog-listing">
+    <header class="page-header">
+        <h1>Blog Articles</h1>
+        <p>@Model.TotalPosts articles available</p>
+    </header>
+
+    <div class="blog-grid">
+        @foreach (var post in Model.BlogPosts)
+        {
+            <partial name="_BlogCard" model="post" />
+        }
+    </div>
+</div>
