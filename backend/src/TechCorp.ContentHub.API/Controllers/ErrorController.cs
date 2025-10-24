@@ -5,6 +5,7 @@ namespace TechCorp.ContentHub.API.Controllers;
 public class ErrorController : Controller
 {
     [Route("Error/{statusCode}")]
+    [ApiExplorerSettings(IgnoreApi = true)]
     public IActionResult HttpStatusCodeHandler(int statusCode)
     {
         switch (statusCode)
