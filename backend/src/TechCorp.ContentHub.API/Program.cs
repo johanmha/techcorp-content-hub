@@ -37,9 +37,18 @@ var app = builder.Build();
 // Configure pipeline
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+else
+{
+    app.UseExceptionHandler("/Error/500");
+    app.UseHsts();
+}
+
+// Handle 404 errors
+app.UseStatusCodePagesWithReExecute("/Error/{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles(); // Enable serving static files from wwwroot
