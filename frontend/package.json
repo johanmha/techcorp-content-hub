@@ -15,16 +15,11 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@tanstack/react-query": "^5.90.5",
-    "axios": "^1.12.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-helmet": "^6.1.0",
-    "react-router-dom": "^7.9.4",
     "typescript": "^5.9.3",
     "webpack": "^5.102.1",
-    "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.2"
+    "webpack-cli": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.28.4",
@@ -32,15 +27,11 @@
     "@babel/preset-react": "^7.27.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
-    "@types/react-helmet": "^6.1.11",
-    "@types/react-router-dom": "^5.3.3",
     "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
-    "html-webpack-plugin": "^5.6.4",
     "mini-css-extract-plugin": "^2.9.4",
     "sass": "^1.93.2",
     "sass-loader": "^16.0.5",
-    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4"
   }
 }
