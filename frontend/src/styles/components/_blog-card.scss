@@ -1,0 +1,60 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.blog-card {
+  border: 1px solid $light-gray;
+  padding: 1.5rem;
+  border-radius: 8px;
+  background: white;
+  @include card-hover;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: $text-primary;
+  }
+
+  p {
+    color: $text-secondary;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-author {
+    color: $text-secondary;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .author-link {
+    color: $primary-color;
+    font-weight: 500;
+  }
+
+  .card-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 1rem;
+    color: $text-secondary;
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+}

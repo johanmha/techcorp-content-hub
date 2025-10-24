@@ -1,0 +1,119 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.authors-listing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-secondary;
+    }
+  }
+}
+
+.author-card {
+  display: block;
+  border: 1px solid $light-gray;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  text-align: center;
+  @include card-hover;
+
+  .author-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: $text-primary;
+  }
+
+  .author-title {
+    color: $primary-color;
+    font-size: 0.9rem;
+    margin: 0 0 0.75rem 0;
+    display: block;
+  }
+
+  .author-bio {
+    color: $text-secondary;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.author-profile {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .profile-header {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      flex: 1;
+
+      h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+      }
+
+      .profile-title {
+        color: $primary-color;
+        font-size: 1.1rem;
+        margin: 0 0 1rem 0;
+      }
+
+      .profile-bio {
+        line-height: 1.6;
+        color: $text-secondary;
+        margin-bottom: 1rem;
+      }
+
+      .social-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+
+        a {
+          color: $primary-color;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}

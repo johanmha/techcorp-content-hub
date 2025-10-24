@@ -1,0 +1,75 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.categories-listing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-secondary;
+    }
+  }
+}
+
+.category-card {
+  display: block;
+  border: 1px solid $light-gray;
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  background: white;
+  @include card-hover;
+
+  h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+    color: $text-primary;
+  }
+
+  p {
+    color: $text-secondary;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+}
+
+.category-detail {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .page-header {
+    padding: 2rem;
+    background: white;
+    border-left: 4px solid;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-secondary;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-count {
+      font-size: 0.9rem;
+      color: $text-secondary;
+    }
+  }
+}

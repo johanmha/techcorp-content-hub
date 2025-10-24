@@ -1,0 +1,123 @@
+@use '../variables' as *;
+
+.blog-listing {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .page-header {
+    margin-bottom: 2rem;
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      color: $text-secondary;
+    }
+  }
+}
+
+.blog-detail {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  .article-header {
+    margin-bottom: 2rem;
+
+    .featured-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid $medium-gray;
+
+      .author-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .author-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .author-title {
+          display: block;
+          font-size: 0.85rem;
+          color: $text-secondary;
+        }
+      }
+
+      .post-meta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+        font-size: 0.9rem;
+        color: $text-secondary;
+      }
+    }
+
+    .article-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  }
+
+  .article-content {
+    line-height: 1.8;
+    font-size: 1.1rem;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin: 1.5rem 0;
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 2rem 0 1rem;
+    }
+  }
+
+  .article-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid $medium-gray;
+
+    .tags {
+      .tag {
+        display: inline-block;
+        padding: 0.35rem 0.75rem;
+        margin: 0 0.5rem 0.5rem 0;
+        background-color: $light-gray;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        color: $text-primary;
+      }
+    }
+  }
+}

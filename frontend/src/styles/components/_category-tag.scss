@@ -1,0 +1,17 @@
+@use '../variables' as *;
+
+.category-tag {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  border-radius: 5px;
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+}
